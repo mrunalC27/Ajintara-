@@ -46,6 +46,17 @@ export function nightsBetween(checkInDate, checkOutDate) {
   return nights;
 }
 
+// "2026-12-24" + 3 days -> "2026-12-27"
+export function addDaysIST(dateString, days) {
+  return dayjs(dateString).add(days, 'day').format('YYYY-MM-DD');
+}
+
+// Every date from "from" to "to", including both ends.
+// ("2026-12-24", "2026-12-26") -> ["2026-12-24", "2026-12-25", "2026-12-26"]
+export function datesInRange(from, to) {
+  return nightsBetween(from, addDaysIST(to, 1));
+}
+
 // Show any moment in IST, whatever the server or browser time zone is
 export function formatIST(date, format = 'DD MMM YYYY, hh:mm A') {
   return dayjs(date).tz(IST).format(format);

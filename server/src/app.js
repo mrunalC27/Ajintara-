@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import { config } from './config/index.js';
 import authRoutes from './routes/authRoutes.js';
 import partnerRoutes from './routes/partnerRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import publicRoutes from './routes/publicRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/partner', partnerRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/properties', publicRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
